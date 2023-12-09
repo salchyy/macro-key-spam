@@ -1,19 +1,18 @@
 # macro-key-spam
 Description
 
-This mod for Tera allows users to automate key presses in the game. It's designed to listen for global key events and execute a predefined key spam action when a specific key is held down.
+This mod for Tera enables users to automate key presses in the game through a global key listener. It allows the user to toggle a macro on and off by pressing a designated start key, which then repeatedly presses another specified key at a set interval.
 
 Features
 
-    Key Hold Detection: The mod listens for a specific key being held down globally (even when the game is not in focus).
-    Key Spamming: Automatically spams a specified key at a defined interval while the designated key is held.
-    Customizable Settings: Users can customize the key to hold, the key to spam, and the delay between spams.
-    Command Interface: Includes commands to toggle settings and check key names.
+    Toggle Macro with Key: The macro is toggled on or off by pressing a specified start key.
+    Key Spamming: Automatically spams a specified key at a user-defined interval when the macro is active.
+    Customizable Settings: Users can customize the start key, the key to spam, and the delay between spams.
+    Command Interface: Includes commands to open the settings UI and to check key names.
     GUI Settings (Optional): A graphical user interface for settings is available if running in TeraProxy's GUI mode.
 
 Requirements
 
-    TeraProxy: This mod requires TeraProxy to be installed.
     Node.js Packages: tera-mod-ui, node-global-key-listener, and robotjs (included).
 
 Usage
@@ -23,7 +22,7 @@ Usage
 
 Settings
 
-    keytohold: The key that, when held down, activates the macro.
+    keytostart: The key that, when pressed, toggles the macro on or off.
     keytospam: The key that will be spammed when the macro is active.
     macrodelay: The delay (in milliseconds) between each key spam action.
 
