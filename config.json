@@ -2,7 +2,7 @@
     "version": 1,
     "data": {
         "enabled": true,
-        "keytohold": "k",
+        "keytostart": "k",
         "macrodelay": 30,
         "keytospam": "x"
     }
