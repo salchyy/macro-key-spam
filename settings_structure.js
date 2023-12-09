@@ -5,8 +5,8 @@ module.exports = [
         "type": "bool"
     },
     {
-        "key": "keytohold",
-        "name": "key to hold down",
+        "key": "keytostart",
+        "name": "key to start the macro",
         "type": "string",
         "minlength": 1,
         "maxlength": 99999,
