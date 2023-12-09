@@ -10,13 +10,6 @@ module.exports = function macro(mod) {
 		ui.on('update', settings => {
 			mod.settings = settings
 		})
-		
-		this.destructor = () => {
-			if (ui) {
-				ui.close();
-				ui = null;
-			}
-		}
 	}	
 	const options = mod.settings;
 	const v = new GlobalKeyboardListener();
@@ -24,25 +17,32 @@ module.exports = function macro(mod) {
 	
 	let intervalId = null,
 		check = false;
+	const state = "UP";
 	
-
 	v.addListener((e) => {
-		if (options.keytohold.toLowerCase() && (e.name.toLowerCase() === options.keytohold.toLowerCase()) && options.enabled) {
-			if(check) {
-				check = false;
-				mod.command.message("name of key pressed: " + e.name)
-			}
-			if (e.state === "DOWN" && !intervalId) {
-				intervalId = setInterval(() => {
-					robot.keyTap(options.keytospam);
-				}, options.macrodelay);				
-			} else if (e.state === "UP" && intervalId) {
-				clearInterval(intervalId);
-				intervalId = null;
-			}
+		if(check) {
+			check = false;
+			mod.command.message("name of key pressed: " + e.name)
+			return
+		}		
+		if (options.keytostart && (e.name.toLowerCase() === options.keytostart.toLowerCase()) && options.enabled && (e.state === state)) {
+				if(!intervalId) {
+					clearInterval(intervalId);
+					intervalId = null;					
+					mod.command.message("Macro on");
+					intervalId = setInterval(() => {
+						robot.keyTap(options.keytospam);
+					}, options.macrodelay);
+				} else {
+					mod.command.message("Macro off");
+					clearInterval(intervalId);
+					intervalId = null;					
+				}
 		}
 	});
 	this.destructor = () => {
+			clearInterval(intervalId);
+			intervalId = null;		
 			v.removeListener();
 			ui.close();
 			ui = null;
